@@ -49,6 +49,8 @@ derives_nothing
         ++count;
         }
 
+    derives_nothing & operator=( derives_nothing const & x );
+
     ~derives_nothing()
         {
         --count;
@@ -72,6 +74,8 @@ derives_std_boost_exception:
         wh_(wh)
         {
         }
+
+    derives_std_boost_exception & operator=( const derives_std_boost_exception & );
 
     char const * what() const throw()
         {
