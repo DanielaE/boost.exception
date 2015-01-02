@@ -3,6 +3,10 @@
 //Distributed under the Boost Software License, Version 1.0. (See accompanying
 //file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
+#if defined(_MSC_VER) && !defined(BOOST_EXCEPTION_ENABLE_WARNINGS)
+#pragma warning(disable: 4702) // unreachable code
+#endif
+
 #include <boost/exception/get_error_info.hpp>
 #include <boost/exception/info_tuple.hpp>
 #include <boost/exception_ptr.hpp>
@@ -29,6 +33,8 @@ user_data
         {
         ++count;
         }
+
+    user_data & operator=( user_data const & x );
 
     ~user_data()
         {
