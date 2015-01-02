@@ -10,6 +10,7 @@
 #endif
 #if defined(_MSC_VER) && !defined(BOOST_EXCEPTION_ENABLE_WARNINGS)
 #pragma warning(push,1)
+#pragma warning(disable: 4702) // unreachable code
 #endif
 
 #include <boost/exception/exception.hpp>
