@@ -9,6 +9,10 @@
 #include <boost/detail/atomic_count.hpp>
 #include <boost/detail/lightweight_test.hpp>
 
+#if defined(_MSC_VER) && !defined(BOOST_EXCEPTION_ENABLE_WARNINGS)
+#pragma warning(disable: 4702) // unreachable code
+#endif
+
 typedef boost::error_info<struct tag_answer,int> answer;
 
 boost::detail::atomic_count exc_count(0);
