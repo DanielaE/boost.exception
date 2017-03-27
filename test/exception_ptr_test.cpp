@@ -14,6 +14,10 @@
 #include <boost/detail/lightweight_test.hpp>
 #include <iostream>
 
+#if defined(_MSC_VER) && !defined(BOOST_EXCEPTION_ENABLE_WARNINGS)
+#pragma warning(disable: 4702) // unreachable code
+#endif
+
 class thread_handle;
 boost::shared_ptr<thread_handle> create_thread( boost::function<void()> const & f );
 void join( thread_handle & t );
