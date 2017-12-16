@@ -18,7 +18,7 @@
 #ifndef BOOST_NO_RTTI
 #include <boost/core/demangle.hpp>
 #endif
-#include <boost/shared_ptr.hpp>
+#include <boost/exception/detail/shared_ptr.hpp>
 #include <stdexcept>
 #include <new>
 #include <ios>
@@ -41,10 +41,12 @@ boost
     class
     exception_ptr
         {
-        typedef boost::shared_ptr<exception_detail::clone_base const> impl;
+        typedef shared_ptr<exception_detail::clone_base const> impl;
         impl ptr_;
         friend void rethrow_exception( exception_ptr const & );
+#ifndef BOOST_EXCEPTION_MINI_BOOST
         typedef exception_detail::clone_base const * (impl::*unspecified_bool_type)() const;
+#endif		
         public:
         exception_ptr()
             {
@@ -64,10 +66,17 @@ boost
             {
             return ptr_!=other.ptr_;
             }
+#ifdef BOOST_EXCEPTION_MINI_BOOST
+        explicit operator bool() const
+            {
+            return ptr_?ptr_.operator bool():0;
+            }
+#else
         operator unspecified_bool_type() const
             {
             return ptr_?&impl::get:0;
             }
+#endif			
         };
 
     template <class T>
